@@ -3,7 +3,7 @@
 import requests as req
 from bs4 import BeautifulSoup
 from modules.other import *
-from modules.entry import *
+from modules.tuple import *
 
 # Get the HTML content of the page
 def getHTML(link):
@@ -36,7 +36,7 @@ def getTypeHTML(soup, a_type):
 
 # Make the Show List from the given HTML
 # Returns a list for an individual season 
-def makeShowList(soup):
+def makeShowList(soup, season):
 	showList = []
 	tags = soup.find_all('div', class_='seasonal-anime js-seasonal-anime') # Gets the whole tag for each entry
 	for i in range(len(tags)):
@@ -45,7 +45,7 @@ def makeShowList(soup):
 		score = getScore(tags[i])
 		members = getMembers(tags[i])
 		image = getImage(tags[i])
-		showList.append(Entry(name, score, id, members, image))
+		showList.append(Entry(name, score, id, members, image, season))
 	
 	return showList
 
@@ -67,5 +67,10 @@ def getMembers(tag):
 	return noWhiteSpaceOrDecimals(tag.find(class_='member fl-r').getText())
 
 def getImage(tag):
-	long_image = tag.find('img')['data-srcset'] # Contains both 1x and 2x images
+	'''
+	long_image = tag.find(class_='imgage').img['data-srcset'] # Contains both 1x and 2x images
 	return long_image.partition(' ')[0] # Only return 1x image
+	'''
+	return "url"
+
+

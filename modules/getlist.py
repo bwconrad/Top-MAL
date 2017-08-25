@@ -24,39 +24,40 @@ def getYear(year, show_types):
 def getSeason(year, season, show_types):
 	url = generateSeasonURL(year, season) # Get the season's url
 	html = getHTML(url) # Extract the HTML form the url
-	season = getAnimeTypes(html, show_types[0], show_types[1], show_types[2], show_types[3], show_types[4]) # Make season list of specified types
-	return season
+	showSeason = (season + ' ' + str(year)).title()
+	seasonList = getAnimeTypes(html, showSeason, show_types[0], show_types[1], show_types[2], show_types[3], show_types[4]) # Make season list of specified types
+	return seasonList
 
 
 # Make a combined list of the specified types of shows
-def getAnimeTypes(html, tv, ona, ova, movie, special):
+def getAnimeTypes(html, season, tv, ona, ova, movie, special):
 	if(tv):
 		tvHTML = getTypeHTML(html, 'tv')
-		tvList = makeShowList(tvHTML)
+		tvList = makeShowList(tvHTML, season)
 	else:
 		tvList = []
 
 	if(ona):
 		onaHTML = getTypeHTML(html, 'ona')
-		onaList = makeShowList(onaHTML)
+		onaList = makeShowList(onaHTML, season)
 	else:
 		onaList = []
 
 	if(ova):
 		ovaHTML = getTypeHTML(html, 'ova')
-		ovaList = makeShowList(ovaHTML)
+		ovaList = makeShowList(ovaHTML, season)
 	else:
 		ovaList = []
 
 	if(movie):
 		movieHTML = getTypeHTML(html, 'movie')
-		movieList = makeShowList(movieHTML)
+		movieList = makeShowList(movieHTML, season)
 	else:
 		movieList = []
 
 	if(special):
 		specialHTML = getTypeHTML(html, 'special')
-		specialList = makeShowList(specialHTML)
+		specialList = makeShowList(specialHTML, season)
 	else:
 		specialList = []
 

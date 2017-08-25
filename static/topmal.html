@@ -3,7 +3,7 @@
 	<head>
 		<title>Top MAL</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="topmal.js"></script>	
+		<script src="client.js"></script>	
 		<link rel="stylesheet" href="ranking.css"></style>
 		<link rel="stylesheet" href="search.css"></style>
 	</head>
@@ -14,14 +14,14 @@
 			<div id="logo">
 				<img src="./Images/logo.png" />
 			</div>
-			<form action="http://127.0.0.1:5000/static/result" method="POST">
+			<form  >
 				<ul id="sortby">
 					<li>
 						<input type="radio" id="score" name='sortby' value="score" checked="checked" />
 						<label for="score">Score</label>
 					</li>
 					<li>
-						<input type="radio" id="pop" name='sortby' value="members" />
+						<input type="radio" id="pop" name='sortby' value="pop" />
 						<label for="pop">Popularity</label>
 					</li>	
 				</ul>
@@ -30,11 +30,11 @@
 				<div id="yearSearch">
 					<div style="display: inline-block;margin-right:10px;">
 						<label for="startYear">From</label>
-						<input id="startYear" type="number" name="startyear" min="1917" max="9000">
+						<input id="startYear" type="number" name="startyear" min="1917" max="9000" value="1917">
 					</div>
 				    <div style="display: inline-block;">
 						<label for="endYear">To</label>
-						<input id="endYear" type="number" name="endyear" min="1917" max="9000">
+						<input id="endYear" type="number" name="endyear" min="1917" max="9000" value="2017">
 					</div>
 					<br>
 					<button type="button" id="alltime" class="smallbutton">All Time</button>
@@ -82,7 +82,7 @@
 				</table>
 				<br>
 
-				<button class="bigbutton">Search</button>
+				<button type="button" id="submit" class="bigbutton">Search</button>
 			</form>
 		</div>
 
@@ -135,28 +135,6 @@
 			</table>
 
 		</div>
-
-		
-
-
-
-
-			
-			
-
-
-		<!--
-		<span id='entries' style="white-space: nowrap">
-				<p><nobr>1   </nobr></p>
-				<img  src="https://myanimelist.cdn-dena.com/r/167x242/images/anime/12/86676.webp?s=0b23d3d85a843719c4885a45a3ff9403" height="242" width="167">
-				<p>Name</p>
-				<p>5.12</p>
-				<p>10000</p>
-
-			</span>
--->
 			
 	</body>
-
-
 </html>
