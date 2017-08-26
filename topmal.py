@@ -1,6 +1,6 @@
 ##---------- Server side data gathering for Top MAL -----------##
 ## Takes in search parameters from client and returns a JSON   ##
-## files with an ordered  list with attributes to be displayed.##
+## file with an ordered list with attributes to be displayed.  ##
 
 from modules.client import *
 from modules.tuple import *
@@ -8,9 +8,10 @@ from flask import Flask, jsonify, g, redirect, request, url_for, render_template
 import json
 import sys
 
+
 app = Flask(__name__)
 
-# On startup send to  main html page
+# On startup send to main html page
 @app.route('/')
 def index():
     return redirect(url_for('static', filename='topmal.html'))
@@ -19,8 +20,7 @@ def index():
 # Accept JSON file from client and return response in JSON
 @app.route('/result', methods = ['POST', 'GET'])
 def result():
-	print("received", file=sys.stdout)
-	
+	print("Received client request", file=sys.stdout)
 	
 	# List of the search parameters
 	searchRequest = Search(request.args.get('sortby'),\
@@ -34,7 +34,7 @@ def result():
 
 	requestedList = getRequestedList(searchRequest)
 
-	print("sent", file=sys.stdout)
+	print("Sent response to client", file=sys.stdout)
 	return json.dumps(requestedList)
 
 '''

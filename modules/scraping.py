@@ -1,22 +1,27 @@
-##---------- Modules for extracting data from MAL pages ----------##
+##---------- Modules for extracting data from MAL pages using Beautiful Soup ----------##
 
 import requests as req
 from bs4 import BeautifulSoup
+import time
 from modules.other import *
 from modules.tuple import *
 
+
 # Get the HTML content of the page
 def getHTML(link):
-	string = req.get(link) # Retrieves the link's HTML as a string
-	if(not string.status_code == req.codes.ok): # Check if request was sucessful
-		string.raise_for_status()
+	string = req.get(link, allow_redirects=True) # Retrieves the link's HTML as a string
+
+	# If request was unsucessful, sleep and try again
+	while(not string.status_code == req.codes.ok): 
+		time.sleep(0.001)
+		string = req.get(link, allow_redirects=True)
 
 	soup = BeautifulSoup(string.text, 'html.parser') # Converts the string into a BeautifulSoup Object
 	return soup
 
 # Get the HTML content for the specified show type (TV, Movie, OVA)
 def getTypeHTML(soup, a_type):
-	# Shows starting that season, NO CONTINUING 
+	# Shows starting that season, NO CONTINUING SHOWS
 	if(a_type == 'tv'):
 		soup = soup.find('div', class_='seasonal-anime-list js-seasonal-anime-list js-seasonal-anime-list-key-1 clearfix')
 
@@ -67,10 +72,18 @@ def getMembers(tag):
 	return noWhiteSpaceOrDecimals(tag.find(class_='member fl-r').getText())
 
 def getImage(tag):
-	'''
-	long_image = tag.find(class_='imgage').img['data-srcset'] # Contains both 1x and 2x images
-	return long_image.partition(' ')[0] # Only return 1x image
-	'''
-	return "url"
+	# Look for 'src' attr
+	try: 
+		return tag.find('img')['src'] 
+	except KeyError: # No 'src'
+		# Look for 'data-srcset'
+		try:
+			long_image = tag.find('img')['data-srcset'] # Contains both 1x and 2x images
+			return long_image.partition(' ')[0] # Only return 1x image
+		except KeyError:
+			return "NOTHING"
+	#return "hello"
+
+
 
 

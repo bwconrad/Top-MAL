@@ -130,7 +130,7 @@ $(document).ready(function(){
         	'special': searchData[7]
         }, 
         function(data) {
-           	console.log(data[0][0]);
+           	console.log(data);
            	//$('#data').displayList(data)
         });
 

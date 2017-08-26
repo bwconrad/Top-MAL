@@ -2,6 +2,7 @@
 
 from collections import namedtuple
 
+
 # Show's scraped info
 Entry = namedtuple('Entry','name score id members image season') 
 
