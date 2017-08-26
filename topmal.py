@@ -37,15 +37,3 @@ def result():
 	print("Sent response to client", file=sys.stdout)
 	return json.dumps(requestedList)
 
-'''
-def main():
-	
-	list = getYearRange(1998, 1999, [False, False, False, True, False])
-	list = sortByScore(list)
-
-	for i in range(len(list)):
-		print(list[i].name + ' ' + list[i].score + ' ' + list[i].id + ' ' + list[i].members  + ' ' + list[i].season) #+ ' ' + #list[i].image
-
-if __name__ == '__main__':
-    main()
- '''

@@ -34,7 +34,7 @@
 					</div>
 				    <div style="display: inline-block;">
 						<label for="endYear">To</label>
-						<input id="endYear" type="number" name="endyear" min="1917" max="9000" value="2017">
+						<input id="endYear" type="number" name="endyear" min="1917" max="" value="">
 					</div>
 					<br>
 					<button type="button" id="alltime" class="smallbutton">All Time</button>
@@ -43,7 +43,8 @@
 						var date = new Date();
 						var year = date.getFullYear();
 						document.getElementById("startYear").setAttribute("max", year);
-						document.getElementById("endYear").setAttribute("max", year); 
+						document.getElementById("endYear").setAttribute("max", year);
+						document.getElementById("endYear").setAttribute("value", year);  
 					</script>
 				</div>
 
@@ -87,7 +88,7 @@
 		</div>
 
 		<div id="ranking">
-			<table class="rankingTable" boarder="1" cellpadding="0" cellspacing="0" width="100%">
+			<table boarder="1" cellpadding="0" cellspacing="0" width="100%">
 				<tr id="header">
 					<td width="15%">Rank</td>
 					<td width="55%">Title</td>
@@ -95,42 +96,28 @@
 					<td width="15%">Members</td>
 				</tr>
 			</table>
+			<script id="entryTemplate" type='text/template'>
+					<tr class="entry">
+						<td class="rank">1</td>
+						<td class="title">
+							<div class="titlecontents">
+								<div class="titleimage">
+									<img src="https://myanimelist.cdn-dena.com/r/167x242/images/anime/12/86676.webp?s=0b23d3d85a843719c4885a45a3ff9403" />
+								</div>
+								<div class="titleinfo">
+									<a class = "name" href="https://myanimelist.net/anime/34902/Tsurezure_Children">Tsurezure Children</a>
+									<p class="season">Summer 2017</p>
+									<p class="type">TV</p>
+								</div>
+							</div>
+							
+						</td>
+						<td class="score">9.50</td>
+						<td class="members">1000000</td>
+					</tr>
+				</script>
 			<table class="rankingTable" boarder="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr class="entry">
-					<td class="rank">1</td>
-					<td class="title">
-						<div class="titlecontents">
-							<div class="titleimage">
-								<img src="https://myanimelist.cdn-dena.com/r/167x242/images/anime/12/86676.webp?s=0b23d3d85a843719c4885a45a3ff9403" />
-							</div>
-							<div class="titleinfo">
-								<a href="https://myanimelist.net/anime/34902/Tsurezure_Children">Tsurezure Children</a>
-								<p class="season">Summer 2017</p>
-							</div>
-						</div>
-						
-					</td>
-					<td class="score">9.50</td>
-					<td class="members">1000000</td>
-				</tr>
-
-				<tr class="entry">
-					<td class="rank">2</td>
-					<td class="title">
-						<div class="titlecontents">
-							<div class="titleimage">
-								<img src="https://myanimelist.cdn-dena.com/r/167x242/images/anime/5/47421.webp?s=d80d0d956153c0a7e5d8dc84c78406e6" />
-							</div>
-							<div class="titleinfo">
-								<a href="https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood">Fullmetal Alchemist: Brotherhood</a>
-								<p class="season">Spring 2009</p>
-							</div>
-						</div>
-						
-					</td>
-					<td class="score">8.70</td>
-					<td class="members">400000</td>
-				</tr>
+				
 				
 			</table>
 

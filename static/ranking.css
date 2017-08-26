@@ -13,6 +13,7 @@
 	font-size: 15px;
 }
 
+
 .entry td{
 	padding: 10px 0;
 }
@@ -66,6 +67,13 @@
 	font-size: 17px; 
 	margin: 0;
 }
+
+.type{
+	padding: 0px 0 0 20px;
+	font-size: 17px; 
+	margin: 0;
+}
+
 
 .score{
 	width: 15%;

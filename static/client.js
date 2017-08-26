@@ -1,19 +1,29 @@
 (function($){
-	$.fn.displayList = function(data){
-		//$(this).html("<p>" + "Hello" + "</p>");
+	// Display response data in rankings
+	$.fn.displayList = function(entries){
 
-		var entryData = data.split(",");
-		var i;
-		for(i = 0; i < (entryData.length)/5; i++){
-			var newEntry = addEntrytoTemplate(entryData[(5*i)], entryData[(5*i)+1], entryData[(5*i)+2],
-			entryData[(5*i)+3], entryData[(5*i)+4], i);
-		}
+		for(i=0; i<entries.length; i++){
+			var item = $('#entryTemplate').html(); // Copy 
+			var template = $(item).clone();
+
+			if(entries[i][1] == '0'){
+				entries[i][1] = 'N/A'
+			}
+
+			// Put in entry's data into the template
+			$(template).find('.rank').html(i+1); 
+			$(template).find('img').attr('src', entries[i][4]);
+			$(template).find('.name').prop('href', 'https://myanimelist.net/anime/' + entries[i][2]);
+			$(template).find('.name').html(entries[i][0]);
+			$(template).find('.season').html(entries[i][5]);
+			$(template).find('.type').html(entries[i][6]);
+			$(template).find('.score').html(entries[i][1]); 
+			$(template).find('.members').html(entries[i][3]); 
+
+			$('.rankingTable').append(template); // Append to bottom of ranking
+		}	
 	}
-
-	$.fn.addEntrytoTemplate = function(name, score, id, members, image, rank){
-		
-	}
-
+	
 	// Get form values
 	$.fn.getFormData = function(){
 		// Sorting Type
@@ -112,11 +122,17 @@
 $(document).ready(function(){
 
     $('#submit').on('click', function(){
+    	$("#submit").css("pointer-events", "none"); // Disable click until finshed
+    	// Get form inputs
     	var searchData = $(this).getFormData();
 
+    	// Validate form
    		if(!($(this).formValidation(searchData))){ 
+   			$("#submit").css("pointer-events", "auto"); // Enable clicking
    			return false; // Invalid form
    		}
+
+   		$(".rankingTable").html("<p><b>Getting Search Results</p>"); // Loading message
 
         $.getJSON('/result', 
         {
@@ -130,11 +146,10 @@ $(document).ready(function(){
         	'special': searchData[7]
         }, 
         function(data) {
-           	console.log(data);
-           	//$('#data').displayList(data)
-        });
-
-
+           	$(".rankingTable").html(""); // Before new search make sure rankings are clear
+           	$('#data').displayList(data) // Show rankings
+           	$("#submit").css("pointer-events", "auto"); // Enable clicking
+        });    
     });
 
     $('#alltime').on('click', function(){

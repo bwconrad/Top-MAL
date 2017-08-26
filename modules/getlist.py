@@ -32,31 +32,31 @@ def getAnimeTypes(html, season, tv, ona, ova, movie, special):
 	# Grab the specific divs for each type and then extract the entries
 	if(tv):
 		tvHTML = getTypeHTML(html, 'tv')
-		tvList = makeShowList(tvHTML, season)
+		tvList = makeShowList(tvHTML, season, 'TV')
 	else:
 		tvList = []
 
 	if(ona):
 		onaHTML = getTypeHTML(html, 'ona')
-		onaList = makeShowList(onaHTML, season)
+		onaList = makeShowList(onaHTML, season, 'ONA')
 	else:
 		onaList = []
 
 	if(ova):
 		ovaHTML = getTypeHTML(html, 'ova')
-		ovaList = makeShowList(ovaHTML, season)
+		ovaList = makeShowList(ovaHTML, season, 'OVA')
 	else:
 		ovaList = []
 
 	if(movie):
 		movieHTML = getTypeHTML(html, 'movie')
-		movieList = makeShowList(movieHTML, season)
+		movieList = makeShowList(movieHTML, season, 'Movie')
 	else:
 		movieList = []
 
 	if(special):
 		specialHTML = getTypeHTML(html, 'special')
-		specialList = makeShowList(specialHTML, season)
+		specialList = makeShowList(specialHTML, season, 'Special')
 	else:
 		specialList = []
 

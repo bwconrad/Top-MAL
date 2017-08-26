@@ -41,7 +41,7 @@ def getTypeHTML(soup, a_type):
 
 # Make the Show List from the given HTML
 # Returns a list for an individual season 
-def makeShowList(soup, season):
+def makeShowList(soup, season, showType):
 	showList = []
 	tags = soup.find_all('div', class_='seasonal-anime js-seasonal-anime') # Gets the whole tag for each entry
 	for i in range(len(tags)):
@@ -50,7 +50,8 @@ def makeShowList(soup, season):
 		score = getScore(tags[i])
 		members = getMembers(tags[i])
 		image = getImage(tags[i])
-		showList.append(Entry(name, score, id, members, image, season))
+
+		showList.append(Entry(name, score, id, members, image, season, showType))
 	
 	return showList
 
