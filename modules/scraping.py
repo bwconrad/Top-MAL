@@ -3,22 +3,30 @@
 import requests as req
 from bs4 import BeautifulSoup, SoupStrainer
 import time
+import sys
 from modules.other import *
 from modules.tuple import *
 
+
+import sys
 
 # Get the HTML content of the page
 def getHTML(link):
 	html = req.get(link, allow_redirects=True) # Retrieves the link's HTML as a string
 
 	# If request was unsucessful, sleep and try again
+	tries = 0
 	while(not html.status_code == req.codes.ok): 
 		time.sleep(0.001)
 		html = req.get(link, allow_redirects=True)
+		tries += 1
+		if(tries>10):
+			time.sleep((tries-9)*5)
+			print("Waiting of " + link + "GET response: " + str((tries-9)*5))
 
 	onlyContent = SoupStrainer(id='content')
 	soup = BeautifulSoup(html.text, "lxml", parse_only=onlyContent) # Converts the string into a BeautifulSoup Object
-	
+
 	return soup
 
 # Get the HTML content for the specified show type (TV, Movie, OVA)

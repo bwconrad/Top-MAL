@@ -30,8 +30,8 @@ def limitList(arr):
 # Remove all duplicates from list
 # Appears when OVAs/ONAs/Specials span over mulitiple seasons
 def deleteDuplicates(arr):
-	new =  OrderedDict((v[0],v) for v in arr)
-	return new
+	new =  OrderedDict((v[0],v) for v in reversed(arr))
+	return OrderedDict(reversed(list(new.items())))
 
 # Convert types requested into boolean list
 def makeTypeList(tv, movie, ova, ona, special):
