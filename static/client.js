@@ -6,9 +6,13 @@
 			var item = $('#entryTemplate').html(); // Copy 
 			var template = $(item).clone();
 
+            // Change entries with score 0 to N/A
 			if(entries[i][1] == '0'){
 				entries[i][1] = 'N/A'
 			}
+
+            // Add thouand separator commas to members
+            entries[i][3] = $(this).addCommas(entries[i][3]);
 
 			// Put in entry's data into the template
 			$(template).find('.rank').html(i+1); 
@@ -24,6 +28,18 @@
 		}	
 	}
 	
+    $.fn.addCommas = function(num){
+        num += '';
+        x = num.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+        }
+
 	// Get form values
 	$.fn.getFormData = function(){
 		// Sorting Type
